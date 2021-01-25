@@ -21,5 +21,5 @@ RUN ./configure
 RUN make
 RUN make install
 #open service port
-EXPOSE 9777 19777
+EXPOSE 9777
 CMD ["boxcoind", "--printtoconsole"]
