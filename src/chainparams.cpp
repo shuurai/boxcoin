@@ -82,13 +82,17 @@ public:
 
         // Deployment of BIP68, BIP112, and BIP113.
         consensus.vDeployments[Consensus::DEPLOYMENT_CSV].bit = 0;
-        consensus.vDeployments[Consensus::DEPLOYMENT_CSV].nStartTime = 1485561600; // January 28, 2017
-        consensus.vDeployments[Consensus::DEPLOYMENT_CSV].nTimeout = 1517356801; // January 31st, 2018
+        // consensus.vDeployments[Consensus::DEPLOYMENT_CSV].nStartTime = 1485561600; // January 28, 2017
+        // consensus.vDeployments[Consensus::DEPLOYMENT_CSV].nTimeout = 1517356801; // January 31st, 2018
+        consensus.vDeployments[Consensus::DEPLOYMENT_CSV].nStartTime = 1488931200; // March 8, 2017
+        consensus.vDeployments[Consensus::DEPLOYMENT_CSV].nTimeout = 1520467200; // March 8, 2018
 
         // Deployment of SegWit (BIP141, BIP143, and BIP147)
         consensus.vDeployments[Consensus::DEPLOYMENT_SEGWIT].bit = 1;
-        consensus.vDeployments[Consensus::DEPLOYMENT_SEGWIT].nStartTime = 1485561600; // January 28, 2017
-        consensus.vDeployments[Consensus::DEPLOYMENT_SEGWIT].nTimeout = 1517356801; // January 31st, 2018
+        // consensus.vDeployments[Consensus::DEPLOYMENT_SEGWIT].nStartTime = 1485561600; // January 28, 2017
+        // consensus.vDeployments[Consensus::DEPLOYMENT_SEGWIT].nTimeout = 1517356801; // January 31st, 2018
+        consensus.vDeployments[Consensus::DEPLOYMENT_SEGWIT].nStartTime = 1488931200; // March 8, 2017
+        consensus.vDeployments[Consensus::DEPLOYMENT_SEGWIT].nTimeout = 1520467200; // March 8, 2018
 
         // The best chain should have at least this much work.
         consensus.nMinimumChainWork = uint256S("0x00"); // 0x0000000000000000000000000000000000000000000002ee655bf00bf13b4cca
@@ -112,6 +116,7 @@ public:
 
         genesis = CreateGenesisBlock(1536519600, 1985968569, 0x1e0ffff0, 1, 50 * COIN);
         consensus.hashGenesisBlock = genesis.GetHash();
+        println(consensus.hashGenesisBlock);
         assert(consensus.hashGenesisBlock == uint256S("0x00000ab665f0e9c1008962fa069c672cedfff47a6d6e3ea8f4b67df6e77531ec"));
         assert(genesis.hashMerkleRoot == uint256S("0xe1ea66cd6d44ccd9ba6d01836474fcdb015532854610ece69c12996bfadd5149"));
 
@@ -131,8 +136,8 @@ public:
         base58Prefixes[SCRIPT_ADDRESS] = std::vector<unsigned char>(1,5);
         base58Prefixes[SCRIPT_ADDRESS2] = std::vector<unsigned char>(1,50);
         base58Prefixes[SECRET_KEY] =     std::vector<unsigned char>(1,177); // 176
-        base58Prefixes[EXT_PUBLIC_KEY] = {0x04, 0x88, 0xB2, 0x1E};
-        base58Prefixes[EXT_SECRET_KEY] = {0x04, 0x88, 0xAD, 0xE4};
+        base58Prefixes[EXT_PUBLIC_KEY] = {0xee, 0x88, 0xB2, 0x1E};
+        base58Prefixes[EXT_SECRET_KEY] = {0xee, 0x88, 0xAD, 0xE4};
 
         bech32_hrp = "omb"; // ltc
 
@@ -316,7 +321,7 @@ public:
 
         UpdateVersionBitsParametersFromArgs(args);
 
-        genesis = CreateGenesisBlock(1536519600, 573909, 0x207fffff, 1, 50 * COIN);
+        genesis = CreateGenesisBlock(1536519600, 573909, 0x1e0ffff0, 1, 50 * COIN);
         consensus.hashGenesisBlock = genesis.GetHash();
         assert(consensus.hashGenesisBlock == uint256S("0x00000af242845840b160cfce2b7f6a9b57ff48132a8ef4e61bb2a2df375a5968"));
         assert(genesis.hashMerkleRoot == uint256S("0xe1ea66cd6d44ccd9ba6d01836474fcdb015532854610ece69c12996bfadd5149"));
