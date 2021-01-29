@@ -69,12 +69,19 @@ public:
         consensus.BIP34Hash = uint256S("fa09d204a83a768ed5a7c8d441fa62f2043abf420cff1226c7b4329aeb9d51cf");
         consensus.BIP65Height = 918684; // bab3041e8977e0dc3eeff63fe707b92bde1dd449d8efafb248c27c8264cc311a
         consensus.BIP66Height = 811879; // 7aceee012833fa8952f8835d8b1b3ae233cd6ab08fdb27a771d2bd7bdc491894
-        consensus.powLimit = uint256S("00ffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff"); 
+
+        // TODO need to understand this better
+        // 00000ffff0000000000000000000000000000000000000000000000000000000
+        consensus.powLimit = uint256S("00ffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff");
+
+        // ALERT it means it takes 3.5 days to mine 2016 tokens
         consensus.nPowTargetTimespan = 3.5 * 24 * 60 * 60; // 3.5 days
         consensus.nPowTargetSpacing = 2.5 * 60;
         consensus.fPowAllowMinDifficultyBlocks = false;
         consensus.fPowNoRetargeting = false;
         consensus.nRuleChangeActivationThreshold = 6048; // 75% of 8064
+
+        // ALERT this confirmation window will calculate how many confirmation it would take (101)
         consensus.nMinerConfirmationWindow = 8064; // nPowTargetTimespan / nPowTargetSpacing * 4
         consensus.vDeployments[Consensus::DEPLOYMENT_TESTDUMMY].bit = 28;
         consensus.vDeployments[Consensus::DEPLOYMENT_TESTDUMMY].nStartTime = 1199145601; // January 1, 2008
@@ -95,10 +102,12 @@ public:
         consensus.vDeployments[Consensus::DEPLOYMENT_SEGWIT].nTimeout = 1520467200; // March 8, 2018
 
         // The best chain should have at least this much work.
+
+        // TODO should add some number here
         consensus.nMinimumChainWork = uint256S("0x0000000000000000000000000000000000000000000000000000000000000000"); // 0x0000000000000000000000000000000000000000000002ee655bf00bf13b4cca
 
         // By default assume that the signatures in ancestors of this block are valid.
-        consensus.defaultAssumeValid = uint256S("0x29c8c00e1a5f446a6364a29633d3f1ee16428d87c8d3851a1c570be8170b04c2"); // 1259849 0xb34a457c601ef8ce3294116e3296078797be7ded1b0d12515395db9ab5e93ab8
+        consensus.defaultAssumeValid = uint256S("0x43059f26252e41efd6468a0b9323ba4cceaf09d81c1496ed2257015005ea63db"); // 1259849 0xb34a457c601ef8ce3294116e3296078797be7ded1b0d12515395db9ab5e93ab8
 
         /**
          * The message start string is designed to be unlikely to occur in normal data.
@@ -150,7 +159,8 @@ public:
 
         checkpointData = {
             {
-                {  0, uint256S("5fc6259da4a120a30e14fe535dcbe427cc947feb516d4d786e926ef6cf6a1cb8")}
+                {       0, uint256S("5fc6259da4a120a30e14fe535dcbe427cc947feb516d4d786e926ef6cf6a1cb8")}.
+                {     746, uint256S("0a3600dc8998f09a8e1df60705877b3a0eb95776c4622bd94aea1f0527ca49b1")}
                 // {  4032, uint256S("0x9ce90e427198fc0ef05e5905ce3503725b80e26afd35a987965fd7e3d9cf0846")},
                 // {  8064, uint256S("0xeb984353fc5190f210651f150c40b8a4bab9eeeff0b729fcb3987da694430d70")},
                 // { 16128, uint256S("0x602edf1859b7f9a6af809f1d9b0e6cb66fdc1d4d9dcd7a4bec03e12a1ccd153d")},
@@ -177,7 +187,7 @@ public:
         };
 
         /* disable fallback fee on mainnet */
-        m_fallback_fee_enabled = false;
+        m_fallback_fee_enabled = true;
     }
 };
 
