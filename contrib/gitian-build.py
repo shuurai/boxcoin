@@ -22,8 +22,8 @@ def setup():
     else:
         programs += ['lxc', 'debootstrap']
     subprocess.check_call(['sudo', 'apt-get', 'install', '-qq'] + programs)
-    if not os.path.isdir('gitian.sigs.ltc'):
-        subprocess.check_call(['git', 'clone', 'https://github.com/lifecoin-project/gitian.sigs.ltc.git'])
+    if not os.path.isdir('gitian.sigs.wlc'):
+        subprocess.check_call(['git', 'clone', 'https://github.com/lifecoin-project/gitian.sigs.wlc.git'])
     if not os.path.isdir('lifecoin-detached-sigs'):
         subprocess.check_call(['git', 'clone', 'https://github.com/lifecoin-project/lifecoin-detached-sigs.git'])
     if not os.path.isdir('gitian-builder'):
@@ -60,20 +60,20 @@ def build():
     if args.linux:
         print('\nCompiling ' + args.version + ' Linux')
         subprocess.check_call(['bin/gbuild', '-j', args.jobs, '-m', args.memory, '--commit', 'lifecoin='+args.commit, '--url', 'lifecoin='+args.url, '../lifecoin/contrib/gitian-descriptors/gitian-linux.yml'])
-        subprocess.check_call(['bin/gsign', '-p', args.sign_prog, '--signer', args.signer, '--release', args.version+'-linux', '--destination', '../gitian.sigs.ltc/', '../lifecoin/contrib/gitian-descriptors/gitian-linux.yml'])
+        subprocess.check_call(['bin/gsign', '-p', args.sign_prog, '--signer', args.signer, '--release', args.version+'-linux', '--destination', '../gitian.sigs.wlc/', '../lifecoin/contrib/gitian-descriptors/gitian-linux.yml'])
         subprocess.check_call('mv build/out/lifecoin-*.tar.gz build/out/src/lifecoin-*.tar.gz ../lifecoin-binaries/'+args.version, shell=True)
 
     if args.windows:
         print('\nCompiling ' + args.version + ' Windows')
         subprocess.check_call(['bin/gbuild', '-j', args.jobs, '-m', args.memory, '--commit', 'lifecoin='+args.commit, '--url', 'lifecoin='+args.url, '../lifecoin/contrib/gitian-descriptors/gitian-win.yml'])
-        subprocess.check_call(['bin/gsign', '-p', args.sign_prog, '--signer', args.signer, '--release', args.version+'-win-unsigned', '--destination', '../gitian.sigs.ltc/', '../lifecoin/contrib/gitian-descriptors/gitian-win.yml'])
+        subprocess.check_call(['bin/gsign', '-p', args.sign_prog, '--signer', args.signer, '--release', args.version+'-win-unsigned', '--destination', '../gitian.sigs.wlc/', '../lifecoin/contrib/gitian-descriptors/gitian-win.yml'])
         subprocess.check_call('mv build/out/lifecoin-*-win-unsigned.tar.gz inputs/', shell=True)
         subprocess.check_call('mv build/out/lifecoin-*.zip build/out/lifecoin-*.exe ../lifecoin-binaries/'+args.version, shell=True)
 
     if args.macos:
         print('\nCompiling ' + args.version + ' MacOS')
         subprocess.check_call(['bin/gbuild', '-j', args.jobs, '-m', args.memory, '--commit', 'lifecoin='+args.commit, '--url', 'lifecoin='+args.url, '../lifecoin/contrib/gitian-descriptors/gitian-osx.yml'])
-        subprocess.check_call(['bin/gsign', '-p', args.sign_prog, '--signer', args.signer, '--release', args.version+'-osx-unsigned', '--destination', '../gitian.sigs.ltc/', '../lifecoin/contrib/gitian-descriptors/gitian-osx.yml'])
+        subprocess.check_call(['bin/gsign', '-p', args.sign_prog, '--signer', args.signer, '--release', args.version+'-osx-unsigned', '--destination', '../gitian.sigs.wlc/', '../lifecoin/contrib/gitian-descriptors/gitian-osx.yml'])
         subprocess.check_call('mv build/out/lifecoin-*-osx-unsigned.tar.gz inputs/', shell=True)
         subprocess.check_call('mv build/out/lifecoin-*.tar.gz build/out/lifecoin-*.dmg ../lifecoin-binaries/'+args.version, shell=True)
 
@@ -81,7 +81,7 @@ def build():
 
     if args.commit_files:
         print('\nCommitting '+args.version+' Unsigned Sigs\n')
-        os.chdir('gitian.sigs.ltc')
+        os.chdir('gitian.sigs.wlc')
         subprocess.check_call(['git', 'add', args.version+'-linux/'+args.signer])
         subprocess.check_call(['git', 'add', args.version+'-win-unsigned/'+args.signer])
         subprocess.check_call(['git', 'add', args.version+'-osx-unsigned/'+args.signer])
@@ -96,7 +96,7 @@ def sign():
         print('\nSigning ' + args.version + ' Windows')
         subprocess.check_call('cp inputs/lifecoin-' + args.version + '-win-unsigned.tar.gz inputs/lifecoin-win-unsigned.tar.gz', shell=True)
         subprocess.check_call(['bin/gbuild', '-i', '--commit', 'signature='+args.commit, '../lifecoin/contrib/gitian-descriptors/gitian-win-signer.yml'])
-        subprocess.check_call(['bin/gsign', '-p', args.sign_prog, '--signer', args.signer, '--release', args.version+'-win-signed', '--destination', '../gitian.sigs.ltc/', '../lifecoin/contrib/gitian-descriptors/gitian-win-signer.yml'])
+        subprocess.check_call(['bin/gsign', '-p', args.sign_prog, '--signer', args.signer, '--release', args.version+'-win-signed', '--destination', '../gitian.sigs.wlc/', '../lifecoin/contrib/gitian-descriptors/gitian-win-signer.yml'])
         subprocess.check_call('mv build/out/lifecoin-*win64-setup.exe ../lifecoin-binaries/'+args.version, shell=True)
         subprocess.check_call('mv build/out/lifecoin-*win32-setup.exe ../lifecoin-binaries/'+args.version, shell=True)
 
@@ -104,14 +104,14 @@ def sign():
         print('\nSigning ' + args.version + ' MacOS')
         subprocess.check_call('cp inputs/lifecoin-' + args.version + '-osx-unsigned.tar.gz inputs/lifecoin-osx-unsigned.tar.gz', shell=True)
         subprocess.check_call(['bin/gbuild', '-i', '--commit', 'signature='+args.commit, '../lifecoin/contrib/gitian-descriptors/gitian-osx-signer.yml'])
-        subprocess.check_call(['bin/gsign', '-p', args.sign_prog, '--signer', args.signer, '--release', args.version+'-osx-signed', '--destination', '../gitian.sigs.ltc/', '../lifecoin/contrib/gitian-descriptors/gitian-osx-signer.yml'])
+        subprocess.check_call(['bin/gsign', '-p', args.sign_prog, '--signer', args.signer, '--release', args.version+'-osx-signed', '--destination', '../gitian.sigs.wlc/', '../lifecoin/contrib/gitian-descriptors/gitian-osx-signer.yml'])
         subprocess.check_call('mv build/out/lifecoin-osx-signed.dmg ../lifecoin-binaries/'+args.version+'/lifecoin-'+args.version+'-osx.dmg', shell=True)
 
     os.chdir(workdir)
 
     if args.commit_files:
         print('\nCommitting '+args.version+' Signed Sigs\n')
-        os.chdir('gitian.sigs.ltc')
+        os.chdir('gitian.sigs.wlc')
         subprocess.check_call(['git', 'add', args.version+'-win-signed/'+args.signer])
         subprocess.check_call(['git', 'add', args.version+'-osx-signed/'+args.signer])
         subprocess.check_call(['git', 'commit', '-a', '-m', 'Add '+args.version+' signed binary sigs for '+args.signer])
@@ -122,15 +122,15 @@ def verify():
     os.chdir('gitian-builder')
 
     print('\nVerifying v'+args.version+' Linux\n')
-    subprocess.check_call(['bin/gverify', '-v', '-d', '../gitian.sigs.ltc/', '-r', args.version+'-linux', '../lifecoin/contrib/gitian-descriptors/gitian-linux.yml'])
+    subprocess.check_call(['bin/gverify', '-v', '-d', '../gitian.sigs.wlc/', '-r', args.version+'-linux', '../lifecoin/contrib/gitian-descriptors/gitian-linux.yml'])
     print('\nVerifying v'+args.version+' Windows\n')
-    subprocess.check_call(['bin/gverify', '-v', '-d', '../gitian.sigs.ltc/', '-r', args.version+'-win-unsigned', '../lifecoin/contrib/gitian-descriptors/gitian-win.yml'])
+    subprocess.check_call(['bin/gverify', '-v', '-d', '../gitian.sigs.wlc/', '-r', args.version+'-win-unsigned', '../lifecoin/contrib/gitian-descriptors/gitian-win.yml'])
     print('\nVerifying v'+args.version+' MacOS\n')
-    subprocess.check_call(['bin/gverify', '-v', '-d', '../gitian.sigs.ltc/', '-r', args.version+'-osx-unsigned', '../lifecoin/contrib/gitian-descriptors/gitian-osx.yml'])
+    subprocess.check_call(['bin/gverify', '-v', '-d', '../gitian.sigs.wlc/', '-r', args.version+'-osx-unsigned', '../lifecoin/contrib/gitian-descriptors/gitian-osx.yml'])
     print('\nVerifying v'+args.version+' Signed Windows\n')
-    subprocess.check_call(['bin/gverify', '-v', '-d', '../gitian.sigs.ltc/', '-r', args.version+'-win-signed', '../lifecoin/contrib/gitian-descriptors/gitian-win-signer.yml'])
+    subprocess.check_call(['bin/gverify', '-v', '-d', '../gitian.sigs.wlc/', '-r', args.version+'-win-signed', '../lifecoin/contrib/gitian-descriptors/gitian-win-signer.yml'])
     print('\nVerifying v'+args.version+' Signed MacOS\n')
-    subprocess.check_call(['bin/gverify', '-v', '-d', '../gitian.sigs.ltc/', '-r', args.version+'-osx-signed', '../lifecoin/contrib/gitian-descriptors/gitian-osx-signer.yml'])
+    subprocess.check_call(['bin/gverify', '-v', '-d', '../gitian.sigs.wlc/', '-r', args.version+'-osx-signed', '../lifecoin/contrib/gitian-descriptors/gitian-osx-signer.yml'])
 
     os.chdir(workdir)
 

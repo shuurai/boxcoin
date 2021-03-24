@@ -35,7 +35,7 @@ If you're using the automated script (found in [contrib/gitian-build.py](/contri
 Check out the source code in the following directory hierarchy.
 
     cd /path/to/your/toplevel/build
-    git clone https://github.com/lifecoin-project/gitian.sigs.ltc.git
+    git clone https://github.com/lifecoin-project/gitian.sigs.wlc.git
     git clone https://github.com/lifecoin-project/lifecoin-detached-sigs.git
     git clone https://github.com/devrandom/gitian-builder.git
     git clone https://github.com/lifecoin-project/lifecoin.git
@@ -70,9 +70,9 @@ Setup Gitian descriptors:
     git checkout v${VERSION}
     popd
 
-Ensure your gitian.sigs.ltc are up-to-date if you wish to gverify your builds against other Gitian signatures.
+Ensure your gitian.sigs.wlc are up-to-date if you wish to gverify your builds against other Gitian signatures.
 
-    pushd ./gitian.sigs.ltc
+    pushd ./gitian.sigs.wlc
     git pull
     popd
 
@@ -121,16 +121,16 @@ The gbuild invocations below <b>DO NOT DO THIS</b> by default.
     
     pushd ./gitian-builder
     ./bin/gbuild --num-make $GITIAN_THREADS --memory $GITIAN_MEMORY --commit lifecoin=v${VERSION} ../lifecoin/contrib/gitian-descriptors/gitian-linux.yml
-    ./bin/gsign --signer "$SIGNER" --release ${VERSION}-linux --destination ../gitian.sigs.ltc/ ../lifecoin/contrib/gitian-descriptors/gitian-linux.yml
+    ./bin/gsign --signer "$SIGNER" --release ${VERSION}-linux --destination ../gitian.sigs.wlc/ ../lifecoin/contrib/gitian-descriptors/gitian-linux.yml
     mv build/out/lifecoin-*.tar.gz build/out/src/lifecoin-*.tar.gz ../
 
     ./bin/gbuild --num-make $GITIAN_THREADS --memory $GITIAN_MEMORY --commit lifecoin=v${VERSION} ../lifecoin/contrib/gitian-descriptors/gitian-win.yml
-    ./bin/gsign --signer "$SIGNER" --release ${VERSION}-win-unsigned --destination ../gitian.sigs.ltc/ ../lifecoin/contrib/gitian-descriptors/gitian-win.yml
+    ./bin/gsign --signer "$SIGNER" --release ${VERSION}-win-unsigned --destination ../gitian.sigs.wlc/ ../lifecoin/contrib/gitian-descriptors/gitian-win.yml
     mv build/out/lifecoin-*-win-unsigned.tar.gz inputs/lifecoin-win-unsigned.tar.gz
     mv build/out/lifecoin-*.zip build/out/lifecoin-*.exe ../
 
     ./bin/gbuild --num-make $GITIAN_THREADS --memory $GITIAN_MEMORY --commit lifecoin=v${VERSION} ../lifecoin/contrib/gitian-descriptors/gitian-osx.yml
-    ./bin/gsign --signer "$SIGNER" --release ${VERSION}-osx-unsigned --destination ../gitian.sigs.ltc/ ../lifecoin/contrib/gitian-descriptors/gitian-osx.yml
+    ./bin/gsign --signer "$SIGNER" --release ${VERSION}-osx-unsigned --destination ../gitian.sigs.wlc/ ../lifecoin/contrib/gitian-descriptors/gitian-osx.yml
     mv build/out/lifecoin-*-osx-unsigned.tar.gz inputs/lifecoin-osx-unsigned.tar.gz
     mv build/out/lifecoin-*.tar.gz build/out/lifecoin-*.dmg ../
     popd
@@ -141,7 +141,7 @@ Build output expected:
   2. linux 32-bit and 64-bit dist tarballs (`lifecoin-${VERSION}-linux[32|64].tar.gz`)
   3. windows 32-bit and 64-bit unsigned installers and dist zips (`lifecoin-${VERSION}-win[32|64]-setup-unsigned.exe`, `lifecoin-${VERSION}-win[32|64].zip`)
   4. macOS unsigned installer and dist tarball (`lifecoin-${VERSION}-osx-unsigned.dmg`, `lifecoin-${VERSION}-osx64.tar.gz`)
-  5. Gitian signatures (in `gitian.sigs.ltc/${VERSION}-<linux|{win,osx}-unsigned>/(your Gitian key)/`)
+  5. Gitian signatures (in `gitian.sigs.wlc/${VERSION}-<linux|{win,osx}-unsigned>/(your Gitian key)/`)
 
 ### Verify other gitian builders signatures to your own. (Optional)
 
@@ -150,16 +150,16 @@ Add other gitian builders keys to your gpg keyring, and/or refresh keys: See `..
 Verify the signatures
 
     pushd ./gitian-builder
-    ./bin/gverify -v -d ../gitian.sigs.ltc/ -r ${VERSION}-linux ../lifecoin/contrib/gitian-descriptors/gitian-linux.yml
-    ./bin/gverify -v -d ../gitian.sigs.ltc/ -r ${VERSION}-win-unsigned ../lifecoin/contrib/gitian-descriptors/gitian-win.yml
-    ./bin/gverify -v -d ../gitian.sigs.ltc/ -r ${VERSION}-osx-unsigned ../lifecoin/contrib/gitian-descriptors/gitian-osx.yml
+    ./bin/gverify -v -d ../gitian.sigs.wlc/ -r ${VERSION}-linux ../lifecoin/contrib/gitian-descriptors/gitian-linux.yml
+    ./bin/gverify -v -d ../gitian.sigs.wlc/ -r ${VERSION}-win-unsigned ../lifecoin/contrib/gitian-descriptors/gitian-win.yml
+    ./bin/gverify -v -d ../gitian.sigs.wlc/ -r ${VERSION}-osx-unsigned ../lifecoin/contrib/gitian-descriptors/gitian-osx.yml
     popd
 
 ### Next steps:
 
-Commit your signature to gitian.sigs.ltc:
+Commit your signature to gitian.sigs.wlc:
 
-    pushd gitian.sigs.ltc
+    pushd gitian.sigs.wlc
     git add ${VERSION}-linux/"${SIGNER}"
     git add ${VERSION}-win-unsigned/"${SIGNER}"
     git add ${VERSION}-osx-unsigned/"${SIGNER}"
@@ -207,8 +207,8 @@ Create (and optionally verify) the signed macOS binary:
 
     pushd ./gitian-builder
     ./bin/gbuild -i --commit signature=v${VERSION} ../lifecoin/contrib/gitian-descriptors/gitian-osx-signer.yml
-    ./bin/gsign --signer "$SIGNER" --release ${VERSION}-osx-signed --destination ../gitian.sigs.ltc/ ../lifecoin/contrib/gitian-descriptors/gitian-osx-signer.yml
-    ./bin/gverify -v -d ../gitian.sigs.ltc/ -r ${VERSION}-osx-signed ../lifecoin/contrib/gitian-descriptors/gitian-osx-signer.yml
+    ./bin/gsign --signer "$SIGNER" --release ${VERSION}-osx-signed --destination ../gitian.sigs.wlc/ ../lifecoin/contrib/gitian-descriptors/gitian-osx-signer.yml
+    ./bin/gverify -v -d ../gitian.sigs.wlc/ -r ${VERSION}-osx-signed ../lifecoin/contrib/gitian-descriptors/gitian-osx-signer.yml
     mv build/out/lifecoin-osx-signed.dmg ../lifecoin-${VERSION}-osx.dmg
     popd
 
@@ -216,19 +216,19 @@ Create (and optionally verify) the signed Windows binaries:
 
     pushd ./gitian-builder
     ./bin/gbuild -i --commit signature=v${VERSION} ../lifecoin/contrib/gitian-descriptors/gitian-win-signer.yml
-    ./bin/gsign --signer "$SIGNER" --release ${VERSION}-win-signed --destination ../gitian.sigs.ltc/ ../lifecoin/contrib/gitian-descriptors/gitian-win-signer.yml
-    ./bin/gverify -v -d ../gitian.sigs.ltc/ -r ${VERSION}-win-signed ../lifecoin/contrib/gitian-descriptors/gitian-win-signer.yml
+    ./bin/gsign --signer "$SIGNER" --release ${VERSION}-win-signed --destination ../gitian.sigs.wlc/ ../lifecoin/contrib/gitian-descriptors/gitian-win-signer.yml
+    ./bin/gverify -v -d ../gitian.sigs.wlc/ -r ${VERSION}-win-signed ../lifecoin/contrib/gitian-descriptors/gitian-win-signer.yml
     mv build/out/lifecoin-*win64-setup.exe ../lifecoin-${VERSION}-win64-setup.exe
     mv build/out/lifecoin-*win32-setup.exe ../lifecoin-${VERSION}-win32-setup.exe
     popd
 
 Commit your signature for the signed macOS/Windows binaries:
 
-    pushd gitian.sigs.ltc
+    pushd gitian.sigs.wlc
     git add ${VERSION}-osx-signed/"${SIGNER}"
     git add ${VERSION}-win-signed/"${SIGNER}"
     git commit -a
-    git push  # Assuming you can push to the gitian.sigs.ltc tree
+    git push  # Assuming you can push to the gitian.sigs.wlc tree
     popd
 
 ### After 3 or more people have gitian-built and their results match:
