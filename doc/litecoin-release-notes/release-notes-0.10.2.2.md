@@ -56,7 +56,7 @@ Protocol:
 - Testnet TCP port 19333 (instead of 18333)
 - Testnet RPC TCP port 19332 (instead of 18332)
 - 84 million coin limit  (instead of 21 million)
-- Magic 0xfbc0b6db       (instead of 0xf9beb4d9)
+- Magic 0xa3b3c1d5       (instead of 0xf9beb4d9)
 - Target Block Time 2.5 minutes (instead of 10 minutes)
 - Target Timespan 3.5 days      (instead of two weeks)
 - bnProofOfWorkLimit = >> 20    (instead of >> 32)
