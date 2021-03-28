@@ -126,7 +126,7 @@ public:
         vSeeds.emplace_back("s0002sg.walklife.io");
         vSeeds.emplace_back("s0003sg.walklife.io");
 
-        base58Prefixes[PUBKEY_ADDRESS] = std::vector<unsigned char>(1,48); // Use the same as LTC
+        base58Prefixes[PUBKEY_ADDRESS] = std::vector<unsigned char>(1,73); // Use W
         base58Prefixes[SCRIPT_ADDRESS] = std::vector<unsigned char>(1,5);
         base58Prefixes[SCRIPT_ADDRESS2] = std::vector<unsigned char>(1,50);
         base58Prefixes[SECRET_KEY] =     std::vector<unsigned char>(1,177); // from 176
