@@ -66,7 +66,7 @@ public:
         consensus.nSubsidyHalvingInterval = 840000;
         consensus.BIP16Height = 0; // 218579; // 87afb798a3ad9378fcd56123c81fb31cfd9a8df4719b9774d71730c16315a092 - October 1, 2012
         consensus.BIP34Height = 0; // 710000;
-        consensus.BIP34Hash = uint256S("bce92d27c5b0bd679ff954db49e8b741c3c483f5da7da926a71aa0fea9696ad1"); // this is set to GENESIS HASH
+        consensus.BIP34Hash = uint256S("0a91cf04bee0d2e9c7993527efb2ef434565555e9dd7fe54ba190a2a804ff840"); // this is set to GENESIS HASH
         consensus.BIP65Height = 0; // 918684; // bab3041e8977e0dc3eeff63fe707b92bde1dd449d8efafb248c27c8264cc311a
         consensus.BIP66Height = 0; // 811879; // 7aceee012833fa8952f8835d8b1b3ae233cd6ab08fdb27a771d2bd7bdc491894
         consensus.powLimit = uint256S("00000fffffffffffffffffffffffffffffffffffffffffffffffffffffffffff"); 
@@ -94,8 +94,7 @@ public:
         consensus.nMinimumChainWork = uint256S("0x0000000000000000000000000000000000000000000000000000000000000000");
 
         // By default assume that the signatures in ancestors of this block are valid.
-        // TODO update later
-        consensus.defaultAssumeValid = uint256S("0xbce92d27c5b0bd679ff954db49e8b741c3c483f5da7da926a71aa0fea9696ad1"); // 1683528
+        consensus.defaultAssumeValid = uint256S("0x0a91cf04bee0d2e9c7993527efb2ef434565555e9dd7fe54ba190a2a804ff840"); // 1683528
 
         /**
          * The message start string is designed to be unlikely to occur in normal data.
@@ -115,7 +114,7 @@ public:
         consensus.hashGenesisBlock = genesis.GetHash();
         std::printf("genesis[%s]\n", consensus.hashGenesisBlock.ToString().c_str());
         std::printf("root[%s]\n", genesis.hashMerkleRoot.ToString().c_str());
-        assert(consensus.hashGenesisBlock == uint256S("0xbce92d27c5b0bd679ff954db49e8b741c3c483f5da7da926a71aa0fea9696ad1"));
+        assert(consensus.hashGenesisBlock == uint256S("0x0a91cf04bee0d2e9c7993527efb2ef434565555e9dd7fe54ba190a2a804ff840"));
         assert(genesis.hashMerkleRoot == uint256S("0xa48face524427bfc48deca2621c751137196409354e648d6149d11e7ecb38c1f"));
 
         // Note that of those which support the service bits prefix, most only support a subset of
@@ -144,7 +143,7 @@ public:
 
         checkpointData = {
             {
-                {     0, uint256S("0xbce92d27c5b0bd679ff954db49e8b741c3c483f5da7da926a71aa0fea9696ad1")},
+                {     0, uint256S("0x0a91cf04bee0d2e9c7993527efb2ef434565555e9dd7fe54ba190a2a804ff840")},
                 // {  1500, uint256S("0x841a2965955dd288cfa707a755d05a54e45f8bd476835ec9af4402a2b59a2967")},
                 // {  4032, uint256S("0x9ce90e427198fc0ef05e5905ce3503725b80e26afd35a987965fd7e3d9cf0846")},
                 // {  8064, uint256S("0xeb984353fc5190f210651f150c40b8a4bab9eeeff0b729fcb3987da694430d70")},
