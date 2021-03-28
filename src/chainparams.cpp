@@ -52,7 +52,7 @@ static CBlock CreateGenesisBlock(const char* pszTimestamp, const CScript& genesi
 static CBlock CreateGenesisBlock(uint32_t nTime, uint32_t nNonce, uint32_t nBits, int32_t nVersion, const CAmount& genesisReward)
 {
     const char* pszTimestamp = "27/03/2021 Walk a bit more each day for better health and now by using walklife.io, more wealth.";
-    const CScript genesisOutputScript = CScript() << ParseHex("04678afdb0fe5548271967f1a67130b7105cd6a828e03909a67962e0ea1f61deb649f6bc3f4cef38c4f35504e51ec112de5c384df7ba0b8d578a4c702b6bf11d5f") << OP_CHECKSIG;
+    const CScript genesisOutputScript = CScript() << ParseHex("04ffff001d01044c6032372f30332f323032312057616c6b206120626974206d6f726520656163682064617920666f7220626574746572206865616c746820616e64206e6f77206279207573696e672077616c6b6c6966652e696f2c206d6f7265207765616c74682e") << OP_CHECKSIG;
     return CreateGenesisBlock(pszTimestamp, genesisOutputScript, nTime, nNonce, nBits, nVersion, genesisReward);
 }
 
@@ -66,7 +66,7 @@ public:
         consensus.nSubsidyHalvingInterval = 840000;
         consensus.BIP16Height = 0; // 218579; // 87afb798a3ad9378fcd56123c81fb31cfd9a8df4719b9774d71730c16315a092 - October 1, 2012
         consensus.BIP34Height = 0; // 710000;
-        consensus.BIP34Hash = uint256S("f1fdbcc7b37b763a75d3cd5bd2f4afe640bfe3c013f72ce24e9f08b5ad9cbb6a"); // this is set to GENESIS HASH
+        consensus.BIP34Hash = uint256S("bce92d27c5b0bd679ff954db49e8b741c3c483f5da7da926a71aa0fea9696ad1"); // this is set to GENESIS HASH
         consensus.BIP65Height = 0; // 918684; // bab3041e8977e0dc3eeff63fe707b92bde1dd449d8efafb248c27c8264cc311a
         consensus.BIP66Height = 0; // 811879; // 7aceee012833fa8952f8835d8b1b3ae233cd6ab08fdb27a771d2bd7bdc491894
         consensus.powLimit = uint256S("00000fffffffffffffffffffffffffffffffffffffffffffffffffffffffffff"); 
@@ -95,7 +95,7 @@ public:
 
         // By default assume that the signatures in ancestors of this block are valid.
         // TODO update later
-        consensus.defaultAssumeValid = uint256S("0xf1fdbcc7b37b763a75d3cd5bd2f4afe640bfe3c013f72ce24e9f08b5ad9cbb6a"); // 1683528
+        consensus.defaultAssumeValid = uint256S("0xbce92d27c5b0bd679ff954db49e8b741c3c483f5da7da926a71aa0fea9696ad1"); // 1683528
 
         /**
          * The message start string is designed to be unlikely to occur in normal data.
@@ -111,12 +111,12 @@ public:
         m_assumed_blockchain_size = 22;
         m_assumed_chain_state_size = 3;
 
-        genesis = CreateGenesisBlock(1616846400, 1616295534, 0x1e0ffff0, 1, 50 * COIN);
+        genesis = CreateGenesisBlock(1616846400, 1617356865, 0x1e0ffff0, 1, 50 * COIN);
         consensus.hashGenesisBlock = genesis.GetHash();
         std::printf("genesis[%s]\n", consensus.hashGenesisBlock.ToString().c_str());
         std::printf("root[%s]\n", genesis.hashMerkleRoot.ToString().c_str());
-        assert(consensus.hashGenesisBlock == uint256S("0xf1fdbcc7b37b763a75d3cd5bd2f4afe640bfe3c013f72ce24e9f08b5ad9cbb6a"));
-        assert(genesis.hashMerkleRoot == uint256S("0x763f84f41822ba91cd50a971c1758aeca2b3be20cad7396817f93270c2ec63f8"));
+        assert(consensus.hashGenesisBlock == uint256S("0xbce92d27c5b0bd679ff954db49e8b741c3c483f5da7da926a71aa0fea9696ad1"));
+        assert(genesis.hashMerkleRoot == uint256S("0xbd12d634dbe723818c0bec122c4ad4e0ff30245e7328e0e13bc949ecde2790d9"));
 
         // Note that of those which support the service bits prefix, most only support a subset of
         // possible options.
@@ -144,7 +144,7 @@ public:
 
         checkpointData = {
             {
-                {     0, uint256S("0xf1fdbcc7b37b763a75d3cd5bd2f4afe640bfe3c013f72ce24e9f08b5ad9cbb6a")},
+                {     0, uint256S("0xbce92d27c5b0bd679ff954db49e8b741c3c483f5da7da926a71aa0fea9696ad1")},
                 // {  1500, uint256S("0x841a2965955dd288cfa707a755d05a54e45f8bd476835ec9af4402a2b59a2967")},
                 // {  4032, uint256S("0x9ce90e427198fc0ef05e5905ce3503725b80e26afd35a987965fd7e3d9cf0846")},
                 // {  8064, uint256S("0xeb984353fc5190f210651f150c40b8a4bab9eeeff0b729fcb3987da694430d70")},
