@@ -51,7 +51,7 @@ static CBlock CreateGenesisBlock(const char* pszTimestamp, const CScript& genesi
  */
 static CBlock CreateGenesisBlock(uint32_t nTime, uint32_t nNonce, uint32_t nBits, int32_t nVersion, const CAmount& genesisReward)
 {
-    const char* pszTimestamp = "27/03/2021 Walk a bit more each day for better health and now by using walklife.io, more wealth.";
+    const char* pszTimestamp = "29th March 2021 Walklife brings you health and wealth for wellness.";
     const CScript genesisOutputScript = CScript() << ParseHex("040184710fa689ad5023690c80f3a49c8f13f8d45b8c857fbcbc8bc4a8e4d3eb4b10f4d4604fa08dce601aaf0f470216fe1b51850b4acf21b179c45070ac7b03a9") << OP_CHECKSIG;
     return CreateGenesisBlock(pszTimestamp, genesisOutputScript, nTime, nNonce, nBits, nVersion, genesisReward);
 }
@@ -66,7 +66,7 @@ public:
         consensus.nSubsidyHalvingInterval = 840000;
         consensus.BIP16Height = 0; // 218579; // 87afb798a3ad9378fcd56123c81fb31cfd9a8df4719b9774d71730c16315a092 - October 1, 2012
         consensus.BIP34Height = 1;
-        consensus.BIP34Hash = uint256S("0a91cf04bee0d2e9c7993527efb2ef434565555e9dd7fe54ba190a2a804ff840"); // this is set to GENESIS HASH
+        consensus.BIP34Hash = uint256S("18d0b4a3d9ac1bbf81911eb59c554c6caa54e5474b9c898164cbe86e9dc115c4"); // this is set to GENESIS HASH
         consensus.BIP65Height = 1; // bab3041e8977e0dc3eeff63fe707b92bde1dd449d8efafb248c27c8264cc311a
         consensus.BIP66Height = 1; // 7aceee012833fa8952f8835d8b1b3ae233cd6ab08fdb27a771d2bd7bdc491894
         consensus.powLimit = uint256S("00000fffffffffffffffffffffffffffffffffffffffffffffffffffffffffff"); 
@@ -94,7 +94,7 @@ public:
         consensus.nMinimumChainWork = uint256S("0x0000000000000000000000000000000000000000000000000000000000000000");
 
         // By default assume that the signatures in ancestors of this block are valid.
-        consensus.defaultAssumeValid = uint256S("0x0a91cf04bee0d2e9c7993527efb2ef434565555e9dd7fe54ba190a2a804ff840"); // 1683528
+        consensus.defaultAssumeValid = uint256S("0x18d0b4a3d9ac1bbf81911eb59c554c6caa54e5474b9c898164cbe86e9dc115c4"); // 1683528
 
         /**
          * The message start string is designed to be unlikely to occur in normal data.
@@ -110,21 +110,21 @@ public:
         m_assumed_blockchain_size = 22;
         m_assumed_chain_state_size = 3;
 
-        genesis = CreateGenesisBlock(1616846400, 1617855382, 0x1e0ffff0, 1, 50 * COIN);
+        genesis = CreateGenesisBlock(1616846400, 1987321019, 0x1e0ffff0, 1, 50 * COIN);
         consensus.hashGenesisBlock = genesis.GetHash();
         std::printf("genesis[%s]\n", consensus.hashGenesisBlock.ToString().c_str());
         std::printf("root[%s]\n", genesis.hashMerkleRoot.ToString().c_str());
-        assert(consensus.hashGenesisBlock == uint256S("0x0a91cf04bee0d2e9c7993527efb2ef434565555e9dd7fe54ba190a2a804ff840"));
-        assert(genesis.hashMerkleRoot == uint256S("0xa48face524427bfc48deca2621c751137196409354e648d6149d11e7ecb38c1f"));
+        assert(consensus.hashGenesisBlock == uint256S("0x18d0b4a3d9ac1bbf81911eb59c554c6caa54e5474b9c898164cbe86e9dc115c4"));
+        assert(genesis.hashMerkleRoot == uint256S("0x30f850c5595a05cdac871436518d220bd323321d507452ea6d38ac813c0dd0f6"));
 
         // Note that of those which support the service bits prefix, most only support a subset of
         // possible options.
         // This is fine at runtime as we'll fall back to using them as a oneshot if they don't support the
         // service bits we want, but we should get them updated to support all service bits wanted by any
         // release ASAP to avoid it where possible.
-        vSeeds.emplace_back("s0001ny.walklife.io");
         vSeeds.emplace_back("s0002sg.walklife.io");
         vSeeds.emplace_back("s0003sg.walklife.io");
+        vSeeds.emplace_back("s0001ny.walklife.io");
 
         base58Prefixes[PUBKEY_ADDRESS] = std::vector<unsigned char>(1,73); // Use W
         base58Prefixes[SCRIPT_ADDRESS] = std::vector<unsigned char>(1,5);
@@ -143,7 +143,7 @@ public:
 
         checkpointData = {
             {
-                {     0, uint256S("0a91cf04bee0d2e9c7993527efb2ef434565555e9dd7fe54ba190a2a804ff840")},
+                {     0, uint256S("18d0b4a3d9ac1bbf81911eb59c554c6caa54e5474b9c898164cbe86e9dc115c4")},
                 // {  1500, uint256S("0x841a2965955dd288cfa707a755d05a54e45f8bd476835ec9af4402a2b59a2967")},
                 // {  4032, uint256S("0x9ce90e427198fc0ef05e5905ce3503725b80e26afd35a987965fd7e3d9cf0846")},
                 // {  8064, uint256S("0xeb984353fc5190f210651f150c40b8a4bab9eeeff0b729fcb3987da694430d70")},
@@ -185,7 +185,7 @@ public:
         consensus.nSubsidyHalvingInterval = 840000;
         consensus.BIP16Height = 0; // always enforce P2SH BIP16 on testnet
         consensus.BIP34Height = 76;
-        consensus.BIP34Hash = uint256S("0e3ebac4a85460b69fea65839bd1a72f729fe639be5827529034a9957324d09c");
+        consensus.BIP34Hash = uint256S("4458f82deb4e06c91a171b115838e5775ba442c4e8d0a3b99fd616a8b8e59888");
         consensus.BIP65Height = 76; // 8075c771ed8b495ffd943980a95f702ab34fce3c8c54e379548bda33cc8c0573
         consensus.BIP66Height = 76; // 8075c771ed8b495ffd943980a95f702ab34fce3c8c54e379548bda33cc8c0573
         consensus.powLimit = uint256S("00000fffffffffffffffffffffffffffffffffffffffffffffffffffffffffff");
@@ -213,7 +213,7 @@ public:
         consensus.nMinimumChainWork = uint256S("0x0000000000000000000000000000000000000000000000000000000000000000");
 
         // By default assume that the signatures in ancestors of this block are valid.
-        consensus.defaultAssumeValid = uint256S("0x0e3ebac4a85460b69fea65839bd1a72f729fe639be5827529034a9957324d09c"); //1174621
+        consensus.defaultAssumeValid = uint256S("0x4458f82deb4e06c91a171b115838e5775ba442c4e8d0a3b99fd616a8b8e59888"); //1174621
 
         pchMessageStart[0] = 0xfd;
         pchMessageStart[1] = 0xd2;
@@ -224,14 +224,15 @@ public:
         m_assumed_blockchain_size = 2;
         m_assumed_chain_state_size = 1;
 
-        genesis = CreateGenesisBlock(1486949366, 1374282, 0x1e0ffff0, 1, 50 * COIN);
+        genesis = CreateGenesisBlock(1486949366, 2512624, 0x1e0ffff0, 1, 50 * COIN);
         consensus.hashGenesisBlock = genesis.GetHash();
-        assert(consensus.hashGenesisBlock == uint256S("0x0e3ebac4a85460b69fea65839bd1a72f729fe639be5827529034a9957324d09c"));
-        assert(genesis.hashMerkleRoot == uint256S("0xa48face524427bfc48deca2621c751137196409354e648d6149d11e7ecb38c1f"));
+        assert(consensus.hashGenesisBlock == uint256S("0x4458f82deb4e06c91a171b115838e5775ba442c4e8d0a3b99fd616a8b8e59888"));
+        assert(genesis.hashMerkleRoot == uint256S("0x30f850c5595a05cdac871436518d220bd323321d507452ea6d38ac813c0dd0f6"));
 
         vFixedSeeds.clear();
         vSeeds.clear();
         // nodes with support for servicebits filtering should be at the top
+        vSeeds.emplace_back("s0003sg.walklife.io");
         vSeeds.emplace_back("test0001sg.walklife.io");
 
         base58Prefixes[PUBKEY_ADDRESS] = std::vector<unsigned char>(1,111);
@@ -251,7 +252,7 @@ public:
 
         checkpointData = {
             {
-                {0, uint256S("0e3ebac4a85460b69fea65839bd1a72f729fe639be5827529034a9957324d09c")},
+                {0, uint256S("4458f82deb4e06c91a171b115838e5775ba442c4e8d0a3b99fd616a8b8e59888")},
             }
         };
 
@@ -316,8 +317,8 @@ public:
 
         genesis = CreateGenesisBlock(1296688602, 1, 0x207fffff, 1, 50 * COIN);
         consensus.hashGenesisBlock = genesis.GetHash();
-        assert(consensus.hashGenesisBlock == uint256S("0xd6e1a4f640c507717077d75de731e280a7ec3d9853045bbf09b0bfc527c655b7"));
-        assert(genesis.hashMerkleRoot == uint256S("0xa48face524427bfc48deca2621c751137196409354e648d6149d11e7ecb38c1f"));
+        assert(consensus.hashGenesisBlock == uint256S("0x7b385d32e520cd665426d297fca1bf3478c00b2c4cc7650111ce5617d4a1a6eb"));
+        assert(genesis.hashMerkleRoot == uint256S("0x30f850c5595a05cdac871436518d220bd323321d507452ea6d38ac813c0dd0f6"));
 
         vFixedSeeds.clear(); //!< Regtest mode doesn't have any fixed seeds.
         vSeeds.clear();      //!< Regtest mode doesn't have any DNS seeds.
@@ -328,7 +329,7 @@ public:
 
         checkpointData = {
             {
-                // {0, uint256S("d6e1a4f640c507717077d75de731e280a7ec3d9853045bbf09b0bfc527c655b7")},
+                // {0, uint256S("7b385d32e520cd665426d297fca1bf3478c00b2c4cc7650111ce5617d4a1a6eb")},
             }
         };
 
