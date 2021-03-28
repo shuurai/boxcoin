@@ -52,7 +52,7 @@ static CBlock CreateGenesisBlock(const char* pszTimestamp, const CScript& genesi
 static CBlock CreateGenesisBlock(uint32_t nTime, uint32_t nNonce, uint32_t nBits, int32_t nVersion, const CAmount& genesisReward)
 {
     const char* pszTimestamp = "27/03/2021 Walk a bit more each day for better health and now by using walklife.io, more wealth.";
-    const CScript genesisOutputScript = CScript() << ParseHex("04ffff001d01044c6032372f30332f323032312057616c6b206120626974206d6f726520656163682064617920666f7220626574746572206865616c746820616e64206e6f77206279207573696e672077616c6b6c6966652e696f2c206d6f7265207765616c74682e") << OP_CHECKSIG;
+    const CScript genesisOutputScript = CScript() << ParseHex("040184710fa689ad5023690c80f3a49c8f13f8d45b8c857fbcbc8bc4a8e4d3eb4b10f4d4604fa08dce601aaf0f470216fe1b51850b4acf21b179c45070ac7b03a9") << OP_CHECKSIG;
     return CreateGenesisBlock(pszTimestamp, genesisOutputScript, nTime, nNonce, nBits, nVersion, genesisReward);
 }
 
