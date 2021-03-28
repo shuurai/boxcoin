@@ -22,4 +22,4 @@ RUN make
 RUN make install
 #open service port
 EXPOSE 9777
-CMD ["lifecoind", "--printtoconsole"]
+CMD ["lifecoind", "--printtoconsole", "--datadir=/root/data"]
