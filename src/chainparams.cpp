@@ -232,7 +232,10 @@ public:
         vFixedSeeds.clear();
         vSeeds.clear();
         // nodes with support for servicebits filtering should be at the top
-        vSeeds.emplace_back("test0001sg.walklife.io");
+        vSeeds.emplace_back("test0001sg.walklife.io"); // dedicated test net for the future
+        vSeeds.emplace_back("s0002sg.walklife.io");
+        vSeeds.emplace_back("s0003sg.walklife.io");
+        vSeeds.emplace_back("s0001ny.walklife.io");
 
         base58Prefixes[PUBKEY_ADDRESS] = std::vector<unsigned char>(1,111);
         base58Prefixes[SCRIPT_ADDRESS] = std::vector<unsigned char>(1,196);
