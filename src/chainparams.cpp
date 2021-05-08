@@ -127,8 +127,8 @@ public:
         vSeeds.emplace_back("s0001ny.walklife.io");
 
         base58Prefixes[PUBKEY_ADDRESS] = std::vector<unsigned char>(1,73); // Use W
-        base58Prefixes[SCRIPT_ADDRESS] = std::vector<unsigned char>(1,5);
-        base58Prefixes[SCRIPT_ADDRESS2] = std::vector<unsigned char>(1,50);
+        base58Prefixes[SCRIPT_ADDRESS] = std::vector<unsigned char>(1,5); // 3
+        base58Prefixes[SCRIPT_ADDRESS2] = std::vector<unsigned char>(1,50); // Use M
         base58Prefixes[SECRET_KEY] =     std::vector<unsigned char>(1,176); // from 176
         base58Prefixes[EXT_PUBLIC_KEY] = {0xE7, 0x88, 0xB2, 0x1E}; // change to 0xE4 from 0x07
         base58Prefixes[EXT_SECRET_KEY] = {0xE7, 0x88, 0xAD, 0xE4}; // change to 0xE4 from 0x07
