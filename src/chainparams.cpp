@@ -112,8 +112,8 @@ public:
 
         genesis = CreateGenesisBlock(1616846400, 1987321019, 0x1e0ffff0, 1, 50 * COIN);
         consensus.hashGenesisBlock = genesis.GetHash();
-        std::printf("genesis[%s]\n", consensus.hashGenesisBlock.ToString().c_str());
-        std::printf("root[%s]\n", genesis.hashMerkleRoot.ToString().c_str());
+        // std::printf("genesis[%s]\n", consensus.hashGenesisBlock.ToString().c_str());
+        // std::printf("root[%s]\n", genesis.hashMerkleRoot.ToString().c_str());
         assert(consensus.hashGenesisBlock == uint256S("0x18d0b4a3d9ac1bbf81911eb59c554c6caa54e5474b9c898164cbe86e9dc115c4"));
         assert(genesis.hashMerkleRoot == uint256S("0x30f850c5595a05cdac871436518d220bd323321d507452ea6d38ac813c0dd0f6"));
 
